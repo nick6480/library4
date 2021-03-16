@@ -9,6 +9,7 @@ const bodyParser = require('body-parser')
 
 const indexRouter = require('./routes/index')
 const authorRouter = require('./routes/author')
+const bookRouter = require('./routes/books')
 
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views')
@@ -19,12 +20,15 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: false}))
 app.use('/', indexRouter)
 app.use('/author', authorRouter)
+app.use('/books', bookRouter)
 
 const mongoose = require('mongoose')
 
 mongoose.connect(process.env.DATABASE_URL, {
-    useNewUrlParser: true})
+    useNewUrlParser: true,
+    useUnifiedTopology: true })
 const db = mongoose.connection
 db.on('error', error => console.error(error))
 db.once('open', () => console.log('Connected to mongoose'))
 app.listen(process.env.PORT || 3000)
+

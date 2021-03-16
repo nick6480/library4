@@ -1,1 +1,10 @@
-Middle
+<h2>Recently added books</h2>
+
+<div>
+    <% books.forEach(book => { %>
+        <div>title: <%= book.title  %></div>
+        <div>Author: <%= book.author %></div>
+        <div>Book description: <%= book.description %> </div>
+        <br>
+        <% }) %>
+</div>
